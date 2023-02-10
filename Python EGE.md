@@ -34,7 +34,7 @@ hn = hex(a)[2:]  # Шестнадцатиричная система
 
 ##### Перевод числа в любую систему
 ```python
-def to_system(num, osn):
+def to_osn(num, osn):
 	"""
 	Имя функции может быть любым
 	Вместо функции можно писать сразу в коде
@@ -56,6 +56,18 @@ def to_system(num, osn):
 	return res
 ```
 
+Перевод числа в СС с основанием больше 10
+```python
+def to_osn(num, osn):
+	res = ""
+	alph = '0123456789ABCDEFGHIJKLMOPQRSTUVWXYZ'
+
+	while num > 0:
+		res = alph[num%osn] + res
+		num //= osn
+
+	return osn
+```
 
 
 ##### Перевод числа из любой системы в десятичную
@@ -147,6 +159,31 @@ s = sum(map(int, str(n))) # 6
 n = bin(2)[2:]  # 10
 s = sum(map(int, n))  # Сумма цифр в двоичной записи
 # Также является суммой всех единиц двоичного числа
+```
+##### Работа со строками и символами
+```python
+s = '12345'
+print(ord(s[0])) # Номер символа `1` в таблице ASCII
+
+#################
+
+num = 10
+s1 = "val:" + str(num)
+s2 = f"val:{num}" # f-строки
+
+if s1 == s2:
+	print("Они одиноковы!")
+	
+##################
+
+s = 'C'
+
+if s == 'A' or s == 'B' or s == 'C':
+	print("Это, конечно, работает...")
+if s in 'ABC':
+	print("Но это выглядит проще")
+
+##################
 ```
 # Задача 2
 ## Сопоставление логических таблиц
@@ -479,6 +516,50 @@ for x in range(10):
 ```
 `Ответ:` 4870
 
+Задача
+№4416
+![[Pasted image 20230210105547.png]]
+Сдандартное решение #1
+```python
+def to_osn(num, osn):
+    res = ""
+    alph = "0123456789ABCDEFGHIJKLMOPQRSTUVWXYZ"
+
+    while num > 0:
+        res = alph[num % osn] + res
+        num //= osn
+
+    return res
+
+
+# Считаем число
+val = 16**44 * 16**30 - (32**5 * (8**40 - 8**32) * (16**17 - 32**4))
+# Заменяем `E` на 1
+res = to_osn(val, 16).replace("E", "1")
+# Удаляем 4 разряд из числа
+res = res[:-5] + res[-4:]
+
+print(res.count("1"))
+```
+Решение #2
+```python
+num = 16**44 * 16**30 - (32**5 * (8**40 - 8**32) * (16**17 - 32**4))
+count = 0
+
+r = 0
+
+while num > 0:
+	# Проверяем, что число цифра ИЛИ =1 ИЛИ  =`E`
+	# а также пропускаем 4 разряд
+    if (num % 16 == 1 or num % 16 == 14) and r != 4:
+        count += 1
+    num //= 16
+    r += 1
+
+print(count)
+```
+`Ответ:` 3
+
 # Задача 17
 ## Основные функции
 Чтение чисел из файла в одну строку
@@ -695,3 +776,216 @@ for n in set_sums:
 print(count, max_sum)
 ```
 `Ответ:` 257 19
+# Задача 24
+## Основные функции
+Получения номера сивола в таблице ASCII
+## Поиск максимума и минимума
+Задача
+№3347
+![[Pasted image 20230210110705.png]]
+
+Решааем
+```python
+file = open("24-j2.txt")
+line = file.readline()
+
+count = 1
+max_count = 0
+
+for i in range(len(line)-1):
+	if line[i] == line[i+1]:
+		count += 1
+	else:
+		max_count = max(max_count, count)
+		count = 1
+
+print(max_count)
+```
+`Ответ:` 75
+
+Следующая задача
+№3348
+![[Pasted image 20230210122849.png]]
+Нам нужны комбинации символов
+Заметим, что комбинация `КОТ` не является самопересекающейся, т.е., конец одной комбинации не может являтся началом другой:
+	\\/--конец первой
+КОТКОТ
+	  ^-- начало второй
+Решааем путем замены всех комбинаций `КОТ` на один символ, например 1
+
+```python
+file = open("24-j1.txt")
+line = file.readline()
+
+line = line.replace("КОТ", '1')
+
+count = 1
+max_count = 0
+for i in range(len(line)-1):
+	if line[i] == '1' and line[i] == line[i+1]:
+		count += 1
+	else:
+		max_count = max(max_count, count)
+		count = 1
+
+print(max_count)
+```
+`Ответ:` 75
+
+
+Некст таск ==немного СЛОЖНЕНЬКАЯ==
+№3349
+![[Pasted image 20230210124417.png]]
+
+Решаем
+```python
+file = open("24-1.txt")
+line = file.readline()
+
+# Начинаем со второго символа т.к. первый не является локальным минимумом
+f_ind = 0
+max_dist = 0
+
+for i in range(1, len(line)-1):
+	# Получаем ascii номера символов
+	a1 = ord(line[i-1])
+	a2 = ord(line[i])
+	a3 = ord(line[i+1])
+
+	if a2 < a3 and a2 < a1:
+		if f_ind == 0: # Если еще не находили локальных минимумов
+			f_ind = i
+		else:
+			distance = i-f_ind
+			max_dist = max(max_dist, distance)
+			f_ind = i
+
+print(max_dist)
+```
+`Ответ:` 29
+
+Задачечка
+№3782
+![[Pasted image 20230210181238.png]]
+
+```python
+file = open("24-s1.txt")
+
+max_q_count = 0
+min_s = ""
+min_s_count = 0
+
+for line in file.readlines():
+    q_count = line.count("Q")
+
+    if q_count > max_q_count:
+        max_q_count = q_count
+        min_s_count = 10**6
+
+        for s in set(line):
+            if s == "\n":
+                continue
+            s_count = line.count(s)
+            if s_count < min_s_count or s_count == min_s_count and s < min_s:
+                min_s = s
+                min_s_count = s_count
+
+file.close()  # Закрываем файл, чтобы чтобы
+# Заново открываем файл, чтобы заново его прочитать
+# и посчитать количество вхождений символа из ответа
+file = open("24-s1.txt") 
+
+count = file.read().count(min_s)
+
+print(f"{min_s}{count}")
+```
+
+ЗЗЗадачаа
+№4142
+![[Pasted image 20230210183930.png]]
+
+Итак. Размышляем
+	Цепочка символов `XYZ` не является самопересекающейся (см. №3348), значит можем её заменить на 1
+	Так же не забываем проверять первый и последний символы!
+
+```python
+file = open("24-171.txt")
+
+max_count = 0
+count = 0
+
+for line in file.readlines(): # Так как все в разных строчках
+    max_count = max(max_count, count)
+    count = 0
+    # Не желательно изменять переменуую объявленную в `for`
+    # поэтому создадим новую
+    _line = line.replace("XYZ", "1")
+
+    for s in _line:
+        if s in "XYZ":  # Вместо сравнения с каждым символом по отдельности
+            # Если этот символ стоит в конце, то проверяем длинну цепочки
+            count += 1
+            max_count = max(max_count, count)
+            # И ставим `1`, потому что оно может быть 
+            # началом новой цепочки символов
+            count = 1
+        elif s == "1":
+            count += 3
+
+        else:
+            max_count = max(max_count, count)
+            count = 0
+
+print(max_count)
+```
+
+`Ответ:` 53
+
+Задвача ==РЕШАЕМ ВНИМАТЕЛЬНО==
+№4209
+![[Pasted image 20230210190248.png]]
+
+Размышляем?
+	Опять же, `KEGE` - не сапоересекающаяся, значит - заменяем
+		Хмм. Не более двух раз. Значит, когда мы встречаем `KEGE`, нам нужно сначала обработатать последовательность, которая включает эту `KEGE`, а потом обработать уже без нее
+		Значит, попробуем запоминать, где мы встретили первую `KEGE`, и когда найдем третью - вернемся к первой и начнем считать без нее
+		==НЕ ЗАБЫВАЕМ==, что, хоть `KEGE` не может входить больше трёх раз, но её части могут!
+		тут ---> `EGEBCVAKEGEKASDAKEG` <---  и тут
+
+Решаем!
+```python
+file = open("24-175.txt")
+line = file.readline().replace("KEGE", "1")
+
+kege_count = 0
+ind = -1
+max_count = 0
+count = 0
+
+# Используем цикл `while`, так как нам нужно возвращатся обратно
+i = 0
+while i < len(line):
+    s = line[i]
+    if s == "1":
+        if ind == -1:
+            ind = i
+        if kege_count == 2:
+	        # Потому что третья `KEGE` может входить как `KEG` в конце
+            max_count = max(max_count, count + 3)
+            kege_count = 0
+            # Потому что первая `KEGE` может входить как `EGE` в начале
+            count = 3
+            i = ind
+            ind = -1
+        else:
+            count += 4  # Так как в последовательности 4 символа
+            kege_count += 1
+    else:
+        count += 1
+
+    i += 1
+
+max_count = max(max_count, count)
+print(max_count)
+```
+`Ответ:` 946
