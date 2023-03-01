@@ -728,7 +728,7 @@ for i in range(2):
 ```python
 from itertools import *
 
-# Все возможные последовательности длинно=r`epeat`из заданных
+# Все возможные последовательности длинно=`repeat`из заданных
 # символов
 product("abc", repeat=10)
 
