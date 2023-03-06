@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "5553d5b1a0564638",
+        "id": "6d6e4d3daac5f5e7",
         "type": "tabs",
         "children": [
           {
-            "id": "968f5a1c15b13089",
+            "id": "3aa699de9128cd13",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Python EGE.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -85,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Python EGE.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Python EGE.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -124,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Python EGE.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -148,9 +140,13 @@
   },
   "active": "51ba90cf361be458",
   "lastOpenFiles": [
+    "Python EGE.md",
+    "Pasted image 20230302234219.png.md",
+    "картиночки/Pasted image 20230210190248.png",
+    "Pasted image 20230304144538.png.md",
+    "Pasted image 20230304143831.png.md",
     "картиночки/Pasted image 20230306155214.png",
     "картиночки/Pasted image 20230203102531.png",
-    "Python EGE.md",
     "картиночки",
     "Python2.md"
   ]
