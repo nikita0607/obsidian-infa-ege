@@ -343,14 +343,28 @@ for i in permutations("КОП", 2):
 ```
 #### Поиск делителей
 ```python
-for i in range(1, n):
-	for de in range(1, int(sqrt(i))+1): #делаем перебор до (кв. корня + 1)
-	    if i%de==0:  
-	        k+=1  
-	        a.append(de)  
-	        if de!=i//de: #проверяем что делитель – не кв. корень из числа
-	            k+=1  
-	            a.append(i//de)
+n = 125
+# Все делители числа 125
+
+dels = []
+for de in range(1, int(n**0.5)+1): # Делаем перебор до (кв. корня + 1)
+	if n%de==0:  
+		dels.append(de)  
+		if de!=n//de: # Проверяем что делитель – не кв. корень из числа
+			dels.append(n//de)
+```
+
+Также делители можно сохранять в `set`,  тогда не придеться проверять делитель на кв. корень:
+
+```python
+n = 125
+# Опять все делители числа 125
+
+dels = set()
+for de in range(1, int(n**0.5)+1):
+	if n%de==0:  
+		dels.add(de)
+		defls.add(n//de)
 ```
 
 # Задача 2
