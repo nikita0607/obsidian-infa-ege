@@ -11,8 +11,12 @@
             "id": "3aa699de9128cd13",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Python EGE.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Python EGE.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Python EGE.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Python EGE.md"
+              }
             }
           }
         ]
@@ -138,7 +146,7 @@
       "command-palette:Открыть палитру команд": false
     }
   },
-  "active": "51ba90cf361be458",
+  "active": "3aa699de9128cd13",
   "lastOpenFiles": [
     "Python EGE.md",
     "Pasted image 20230302234219.png.md",
